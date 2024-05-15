@@ -1,0 +1,28 @@
+version: '3'
+
+networks:
+  my_network:
+    external: true
+    driver: bridge
+
+services:
+  gateway:
+    build: .
+    ports:
+      - "8080:8080"
+    depends_on:
+      - gwsvc
+    networks:
+      - my_network
+
+  gwsvc:
+    build:
+      context: .
+      dockerfile: Dockerfile
+    ports:
+      - "50070:50070"
+      - "50075:50075"
+    env_file:
+      - .env
+    networks:
+      - my_network
