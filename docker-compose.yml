@@ -6,23 +6,35 @@ networks:
     driver: bridge
 
 services:
-  gateway:
+  gwsvc:
     build: .
+#      context: .
+#      dockerfile: Dockerfile
     ports:
       - "8080:8080"
-    depends_on:
-      - gwsvc
+      - "50012:50012"
     networks:
       - my_network
 
-  gwsvc:
-    build:
-      context: .
-      dockerfile: Dockerfile
-    ports:
-      - "50070:50070"
-      - "50075:50075"
-    env_file:
-      - .env
-    networks:
-      - my_network
+#  gateway:
+#    build: .
+#    ports:
+#      - "8080:8080"
+#    depends_on:
+#      - gwsvc
+#    networks:
+#      - my_network
+#
+#  gwsvc:
+#    build:
+#      context: .
+#      dockerfile: Dockerfile
+#    ports:
+##      - "50070:50070"
+#      - "50011:50011"
+##      - "50075:50075"
+#      - "50012:50012"
+##    env_file:
+##      - .env
+#    networks:
+#      - my_network
