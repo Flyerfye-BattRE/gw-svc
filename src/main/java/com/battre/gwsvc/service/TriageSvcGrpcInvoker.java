@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.logging.Logger;
 
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
 import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
 
 /**
@@ -29,6 +30,6 @@ public class TriageSvcGrpcInvoker {
         GenerateIntakeBatteryOrderRequest request = GenerateIntakeBatteryOrderRequest.newBuilder().build();
         GenerateIntakeBatteryOrderResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "generateIntakeBatteryOrder", request);
 
-        return processSimpleGrpcResponse(response, "Could not generate Intake Battery Order.");
+        return processComplexGrpcResponse(response, "Could not generate Intake Battery Order.");
     }
 }

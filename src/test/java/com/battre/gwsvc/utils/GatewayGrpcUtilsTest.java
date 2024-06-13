@@ -163,7 +163,7 @@ class GatewayGrpcUtilsTest {
 
         String result = GatewayGrpcUtils.processSimpleGrpcResponse(grpcResponse, "Error");
 
-        assertEquals("Success", result);
+        assertEquals("Success: Ok", result);
     }
 
     @Test

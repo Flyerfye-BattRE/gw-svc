@@ -31,11 +31,16 @@ public class GatewayGrpcUtils {
         String grpcResponse = grpcMethod.get();
         logger.info("gRPC response: " + grpcResponse);
 
-        if (grpcResponse.startsWith("Failure")) {
+        if (grpcResponse.startsWith("Success:")) {
+            exchange.getResponse().setStatusCode(HttpStatus.OK);
+        } else if (grpcResponse.startsWith("Failure:")) {
             exchange.getResponse().setStatusCode(HttpStatus.INTERNAL_SERVER_ERROR);
         } else {
-            exchange.getResponse().setStatusCode(HttpStatus.OK);
+            exchange.getResponse().setStatusCode(HttpStatus.SERVICE_UNAVAILABLE);
         }
+
+        // Strip the grpc status prefix from the response
+        grpcResponse = grpcResponse.replaceFirst("^(Failure: |Success: )", "");
 
         exchange.getResponse().getHeaders().setContentType(MediaType.APPLICATION_JSON);
         DataBuffer buffer = exchange.getResponse().bufferFactory().wrap(grpcResponse.getBytes(StandardCharsets.UTF_8));
@@ -87,7 +92,7 @@ public class GatewayGrpcUtils {
             Method getSuccessMethod = response.getClass().getMethod("getSuccess");
             if (getSuccessMethod != null) {
                 if (response != null && (boolean) getSuccessMethod.invoke(response, new Object[0])) {
-                    return "Success";
+                    return "Success: Ok";
                 } else {
                     return "Failure: " + failureMessage;
                 }

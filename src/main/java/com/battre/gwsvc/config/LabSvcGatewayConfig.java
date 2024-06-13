@@ -139,21 +139,21 @@ public class LabSvcGatewayConfig {
                         }))
                         .uri("no://op"))
 
-                // getTesterMaintenanceLogs
-                .route("labsvc_getTesterMaintenanceLogs", r -> r.path("/lab/getTesterMaintenanceLogs")
+                // getTesterStnInfo
+                .route("labsvc_getTesterStnInfo", r -> r.path("/lab/getTesterStnInfo")
                         .and()
                         .method(HttpMethod.GET)
                         .filters(f -> f.filter((exchange, chain) -> {
-                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getTesterMaintenanceLogs);
+                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getTesterStnInfo);
                         }))
                         .uri("no://op"))
 
-                // getRefurbMaintenanceLogs
-                .route("labsvc_getRefurbMaintenanceLogs", r -> r.path("/lab/getRefurbMaintenanceLogs")
+                // getRefurbStnInfo
+                .route("labsvc_getRefurbStnInfo", r -> r.path("/lab/getRefurbStnInfo")
                         .and()
                         .method(HttpMethod.GET)
                         .filters(f -> f.filter((exchange, chain) -> {
-                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getRefurbMaintenanceLogs);
+                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getRefurbStnInfo);
                         }))
                         .uri("no://op"))
 

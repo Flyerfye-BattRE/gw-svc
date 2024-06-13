@@ -7,14 +7,14 @@ import com.battre.stubs.services.ChangeBatteryTesterPriorityRequest;
 import com.battre.stubs.services.ChangeBatteryTesterPriorityResponse;
 import com.battre.stubs.services.GetLabPlansRequest;
 import com.battre.stubs.services.GetLabPlansResponse;
-import com.battre.stubs.services.GetRefurbMaintenanceLogsRequest;
-import com.battre.stubs.services.GetRefurbMaintenanceLogsResponse;
+import com.battre.stubs.services.GetRefurbStnInfoRequest;
+import com.battre.stubs.services.GetRefurbStnInfoResponse;
 import com.battre.stubs.services.GetRefurbPlansRequest;
 import com.battre.stubs.services.GetRefurbPlansResponse;
 import com.battre.stubs.services.GetTesterBacklogRequest;
 import com.battre.stubs.services.GetTesterBacklogResponse;
-import com.battre.stubs.services.GetTesterMaintenanceLogsRequest;
-import com.battre.stubs.services.GetTesterMaintenanceLogsResponse;
+import com.battre.stubs.services.GetTesterStnInfoRequest;
+import com.battre.stubs.services.GetTesterStnInfoResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -100,16 +100,16 @@ public class LabSvcGrpcInvoker {
         return processSimpleGrpcResponse(response, "Could not change Battery Refurb Priority.");
     }
 
-    public String getTesterMaintenanceLogs() {
-        GetTesterMaintenanceLogsRequest request = GetTesterMaintenanceLogsRequest.newBuilder().build();
-        GetTesterMaintenanceLogsResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getTesterMaintenanceLogs", request);
+    public String getTesterStnInfo() {
+        GetTesterStnInfoRequest request = GetTesterStnInfoRequest.newBuilder().build();
+        GetTesterStnInfoResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getTesterStnInfo", request);
 
         return processComplexGrpcResponse(response, "Could not get Tester Maintenance Logs.");
     }
 
-    public String getRefurbMaintenanceLogs() {
-        GetRefurbMaintenanceLogsRequest request = GetRefurbMaintenanceLogsRequest.newBuilder().build();
-        GetRefurbMaintenanceLogsResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getRefurbMaintenanceLogs", request);
+    public String getRefurbStnInfo() {
+        GetRefurbStnInfoRequest request = GetRefurbStnInfoRequest.newBuilder().build();
+        GetRefurbStnInfoResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getRefurbStnInfo", request);
 
         return processComplexGrpcResponse(response, "Could not get Refurb Maintenance Logs.");
     }
