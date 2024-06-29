@@ -5,5 +5,5 @@ WORKDIR /app
 #Expose server port
 EXPOSE 8080
 #Expose gRPC port
-EXPOSE 8085
+EXPOSE 80
 CMD ["java", "-jar", "gw-svc.jar"]
