@@ -11,25 +11,24 @@ import java.util.logging.Logger;
 import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
 import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
 
-/**
- * Contains gRPC functionality required for invoking Triage Service methods.
- *
- */
+/** Contains gRPC functionality required for invoking Triage Service methods. */
 @Service
 public class TriageSvcGrpcInvoker {
-    private static final Logger logger = Logger.getLogger(TriageSvcGrpcInvoker.class.getName());
-    private final GrpcMethodInvoker grpcMethodInvoker;
-    private final String serviceName = "triagesvc";
+  private static final Logger logger = Logger.getLogger(TriageSvcGrpcInvoker.class.getName());
+  private final GrpcMethodInvoker grpcMethodInvoker;
+  private final String serviceName = "triagesvc";
 
-    @Autowired
-    public TriageSvcGrpcInvoker(GrpcMethodInvoker grpcMethodInvoker) {
-        this.grpcMethodInvoker = grpcMethodInvoker;
-    }
+  @Autowired
+  public TriageSvcGrpcInvoker(GrpcMethodInvoker grpcMethodInvoker) {
+    this.grpcMethodInvoker = grpcMethodInvoker;
+  }
 
-    public String generateIntakeBatteryOrder() {
-        GenerateIntakeBatteryOrderRequest request = GenerateIntakeBatteryOrderRequest.newBuilder().build();
-        GenerateIntakeBatteryOrderResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "generateIntakeBatteryOrder", request);
+  public String generateIntakeBatteryOrder() {
+    GenerateIntakeBatteryOrderRequest request =
+        GenerateIntakeBatteryOrderRequest.newBuilder().build();
+    GenerateIntakeBatteryOrderResponse response =
+        grpcMethodInvoker.invokeNonblock(serviceName, "generateIntakeBatteryOrder", request);
 
-        return processComplexGrpcResponse(response, "Could not generate Intake Battery Order.");
-    }
+    return processComplexGrpcResponse(response, "Could not generate Intake Battery Order.");
+  }
 }

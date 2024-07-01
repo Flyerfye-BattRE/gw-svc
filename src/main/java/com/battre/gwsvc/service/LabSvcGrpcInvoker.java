@@ -1,5 +1,8 @@
 package com.battre.gwsvc.service;
 
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
+
 import com.battre.grpcifc.GrpcMethodInvoker;
 import com.battre.stubs.services.ChangeBatteryRefurbPriorityRequest;
 import com.battre.stubs.services.ChangeBatteryRefurbPriorityResponse;
@@ -7,21 +10,17 @@ import com.battre.stubs.services.ChangeBatteryTesterPriorityRequest;
 import com.battre.stubs.services.ChangeBatteryTesterPriorityResponse;
 import com.battre.stubs.services.GetLabPlansRequest;
 import com.battre.stubs.services.GetLabPlansResponse;
-import com.battre.stubs.services.GetRefurbStnInfoRequest;
-import com.battre.stubs.services.GetRefurbStnInfoResponse;
 import com.battre.stubs.services.GetRefurbPlansRequest;
 import com.battre.stubs.services.GetRefurbPlansResponse;
+import com.battre.stubs.services.GetRefurbStnInfoRequest;
+import com.battre.stubs.services.GetRefurbStnInfoResponse;
 import com.battre.stubs.services.GetTesterBacklogRequest;
 import com.battre.stubs.services.GetTesterBacklogResponse;
 import com.battre.stubs.services.GetTesterStnInfoRequest;
 import com.battre.stubs.services.GetTesterStnInfoResponse;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.logging.Logger;
-
-import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
-import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
 
 /**
  * Contains gRPC functionality required for invoking Lab Service methods.

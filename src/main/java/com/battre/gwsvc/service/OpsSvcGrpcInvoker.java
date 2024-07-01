@@ -1,5 +1,8 @@
 package com.battre.gwsvc.service;
 
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
+
 import com.battre.grpcifc.GrpcMethodInvoker;
 import com.battre.stubs.services.AddCustomerRequest;
 import com.battre.stubs.services.AddCustomerResponse;
@@ -14,13 +17,9 @@ import com.battre.stubs.services.RemoveCustomerRequest;
 import com.battre.stubs.services.RemoveCustomerResponse;
 import com.battre.stubs.services.UpdateCustomerRequest;
 import com.battre.stubs.services.UpdateCustomerResponse;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.logging.Logger;
-
-import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
-import static com.battre.gwsvc.utils.GatewayGrpcUtils.processSimpleGrpcResponse;
 
 /**
  * Contains gRPC functionality required for invoking Ops Service methods.

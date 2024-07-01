@@ -12,32 +12,31 @@ import java.util.logging.Logger;
 
 import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
 
-/**
- * Contains gRPC functionality required for invoking Spec Service methods.
- *
- */
+/** Contains gRPC functionality required for invoking Spec Service methods. */
 @Service
 public class SpecSvcGrpcInvoker {
-    private static final Logger logger = Logger.getLogger(SpecSvcGrpcInvoker.class.getName());
-    private final GrpcMethodInvoker grpcMethodInvoker;
-    private final String serviceName = "specsvc";
+  private static final Logger logger = Logger.getLogger(SpecSvcGrpcInvoker.class.getName());
+  private final GrpcMethodInvoker grpcMethodInvoker;
+  private final String serviceName = "specsvc";
 
-    @Autowired
-    public SpecSvcGrpcInvoker(GrpcMethodInvoker grpcMethodInvoker) {
-        this.grpcMethodInvoker = grpcMethodInvoker;
-    }
+  @Autowired
+  public SpecSvcGrpcInvoker(GrpcMethodInvoker grpcMethodInvoker) {
+    this.grpcMethodInvoker = grpcMethodInvoker;
+  }
 
-    public String getAllBatterySpecs() {
-        GetAllBatterySpecsRequest request = GetAllBatterySpecsRequest.newBuilder().build();
-        GetAllBatterySpecsResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getAllBatterySpecs", request);
+  public String getAllBatterySpecs() {
+    GetAllBatterySpecsRequest request = GetAllBatterySpecsRequest.newBuilder().build();
+    GetAllBatterySpecsResponse response =
+        grpcMethodInvoker.invokeNonblock(serviceName, "getAllBatterySpecs", request);
 
-        return processComplexGrpcResponse(response, "Could not get All Battery Specs.");
-    }
+    return processComplexGrpcResponse(response, "Could not get All Battery Specs.");
+  }
 
-    public String getBatteryTiers() {
-        GetBatteryTiersRequest request = GetBatteryTiersRequest.newBuilder().build();
-        GetBatteryTiersResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getBatteryTiers", request);
+  public String getBatteryTiers() {
+    GetBatteryTiersRequest request = GetBatteryTiersRequest.newBuilder().build();
+    GetBatteryTiersResponse response =
+        grpcMethodInvoker.invokeNonblock(serviceName, "getBatteryTiers", request);
 
-        return processComplexGrpcResponse(response, "Could not get Battery Tiers.");
-    }
+    return processComplexGrpcResponse(response, "Could not get Battery Tiers.");
+  }
 }

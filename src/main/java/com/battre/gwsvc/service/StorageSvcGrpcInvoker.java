@@ -1,14 +1,13 @@
 package com.battre.gwsvc.service;
 
+import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
+
 import com.battre.grpcifc.GrpcMethodInvoker;
 import com.battre.stubs.services.GetStorageStatsRequest;
 import com.battre.stubs.services.GetStorageStatsResponse;
+import java.util.logging.Logger;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
-
-import java.util.logging.Logger;
-
-import static com.battre.gwsvc.utils.GatewayGrpcUtils.processComplexGrpcResponse;
 
 /**
  * Contains gRPC functionality required for invoking Storage Service methods.

@@ -15,38 +15,54 @@ import static com.battre.gwsvc.utils.GatewayGrpcUtils.processNoInputGrpcRequest;
 /**
  * Implements the client-facing gateway routes for the Spec Service.
  *
- * <p>Note: Because incoming REST request are converted to gRPC requests in the filter, no forwarding
- * address is specified in the uri.</p>
- *
+ * <p>Note: Because incoming REST request are converted to gRPC requests in the filter, no
+ * forwarding address is specified in the uri.
  */
 @Configuration
 public class SpecSvcGatewayConfig {
-    private static final Logger logger = Logger.getLogger(SpecSvcGatewayConfig.class.getName());
+  private static final Logger logger = Logger.getLogger(SpecSvcGatewayConfig.class.getName());
 
-    private final SpecSvcGrpcInvoker grpcMethodInvoker;
+  private final SpecSvcGrpcInvoker grpcMethodInvoker;
 
-    @Autowired
-    public SpecSvcGatewayConfig(SpecSvcGrpcInvoker grpcMethodInvoker) {
-        this.grpcMethodInvoker = grpcMethodInvoker;
-    }
+  @Autowired
+  public SpecSvcGatewayConfig(SpecSvcGrpcInvoker grpcMethodInvoker) {
+    this.grpcMethodInvoker = grpcMethodInvoker;
+  }
 
-    @Bean
-    public RouteLocator specSvcRouteLocator(RouteLocatorBuilder builder) {
-        return builder.routes()
-                .route("specsvc_getAllBatterySpecs", r -> r.path("/spec/getAllBatterySpecs")
-                        .and()
-                        .method(HttpMethod.GET)
-                        .filters(f -> f.filter((exchange, chain) -> {
-                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getAllBatterySpecs);
-                        }))
-                        .uri("no://op"))
-                .route("specsvc_getBatteryTiers", r -> r.path("/spec/getBatteryTiers")
-                        .and()
-                        .method(HttpMethod.GET)
-                        .filters(f -> f.filter((exchange, chain) -> {
-                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getBatteryTiers);
-                        }))
-                        .uri("no://op"))
-                .build();
-    }
+  @Bean
+  public RouteLocator specSvcRouteLocator(RouteLocatorBuilder builder) {
+    return builder
+        .routes()
+        // getAllBatterySpecs
+        .route(
+            "specsvc_getAllBatterySpecs",
+            r ->
+                r.path("/spec/getAllBatterySpecs")
+                    .and()
+                    .method(HttpMethod.GET)
+                    .filters(
+                        f ->
+                            f.filter(
+                                (exchange, chain) -> {
+                                  return processNoInputGrpcRequest(
+                                      exchange, chain, grpcMethodInvoker::getAllBatterySpecs);
+                                }))
+                    .uri("no://op"))
+        // getBatteryTiers
+        .route(
+            "specsvc_getBatteryTiers",
+            r ->
+                r.path("/spec/getBatteryTiers")
+                    .and()
+                    .method(HttpMethod.GET)
+                    .filters(
+                        f ->
+                            f.filter(
+                                (exchange, chain) -> {
+                                  return processNoInputGrpcRequest(
+                                      exchange, chain, grpcMethodInvoker::getBatteryTiers);
+                                }))
+                    .uri("no://op"))
+        .build();
+  }
 }

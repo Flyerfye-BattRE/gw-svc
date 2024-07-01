@@ -13,137 +13,132 @@ import java.util.List;
 import java.util.Map;
 
 class MockGrpcResponse implements Message {
-    private boolean success;
+  private final boolean success;
 
-    public MockGrpcResponse(boolean success) {
-        this.success = success;
-    }
+  public MockGrpcResponse(boolean success) {
+    this.success = success;
+  }
 
-    public boolean getSuccess() {
-        return success;
-    }
+  public boolean getSuccess() {
+    return success;
+  }
 
-    @Override
-    public Parser<? extends Message> getParserForType() {
-        return null;
-    }
+  @Override
+  public Parser<? extends Message> getParserForType() {
+    return null;
+  }
 
-    @Override
-    public ByteString toByteString() {
-        return null;
-    }
+  @Override
+  public ByteString toByteString() {
+    return null;
+  }
 
-    @Override
-    public byte[] toByteArray() {
-        return new byte[0];
-    }
+  @Override
+  public byte[] toByteArray() {
+    return new byte[0];
+  }
 
-    @Override
-    public void writeTo(OutputStream output) throws IOException {
+  @Override
+  public void writeTo(OutputStream output) throws IOException {}
 
-    }
+  @Override
+  public void writeDelimitedTo(OutputStream output) throws IOException {}
 
-    @Override
-    public void writeDelimitedTo(OutputStream output) throws IOException {
+  @Override
+  public boolean equals(Object other) {
+    return false;
+  }
 
-    }
+  @Override
+  public int hashCode() {
+    return 0;
+  }
 
-    @Override
-    public boolean equals(Object other) {
-        return false;
-    }
+  @Override
+  public String toString() {
+    return null;
+  }
 
-    @Override
-    public int hashCode() {
-        return 0;
-    }
+  @Override
+  public Builder newBuilderForType() {
+    return null;
+  }
 
-    @Override
-    public String toString() {
-        return null;
-    }
+  @Override
+  public Builder toBuilder() {
+    return null;
+  }
 
-    @Override
-    public Builder newBuilderForType() {
-        return null;
-    }
+  @Override
+  public int getSerializedSize() {
+    return 0;
+  }
 
-    @Override
-    public Builder toBuilder() {
-        return null;
-    }
+  @Override
+  public void writeTo(CodedOutputStream output) {}
 
-    @Override
-    public int getSerializedSize() {
-        return 0;
-    }
+  @Override
+  public boolean isInitialized() {
+    return false;
+  }
 
-    @Override
-    public void writeTo(CodedOutputStream output) {
-    }
+  @Override
+  public Message getDefaultInstanceForType() {
+    return null;
+  }
 
-    @Override
-    public boolean isInitialized() {
-        return false;
-    }
+  @Override
+  public List<String> findInitializationErrors() {
+    return null;
+  }
 
-    @Override
-    public Message getDefaultInstanceForType() {
-        return null;
-    }
+  @Override
+  public String getInitializationErrorString() {
+    return null;
+  }
 
-    @Override
-    public List<String> findInitializationErrors() {
-        return null;
-    }
+  @Override
+  public Descriptors.Descriptor getDescriptorForType() {
+    return null;
+  }
 
-    @Override
-    public String getInitializationErrorString() {
-        return null;
-    }
+  @Override
+  public Map<Descriptors.FieldDescriptor, Object> getAllFields() {
+    return null;
+  }
 
-    @Override
-    public Descriptors.Descriptor getDescriptorForType() {
-        return null;
-    }
+  @Override
+  public boolean hasOneof(Descriptors.OneofDescriptor oneof) {
+    return false;
+  }
 
-    @Override
-    public Map<Descriptors.FieldDescriptor, Object> getAllFields() {
-        return null;
-    }
+  @Override
+  public Descriptors.FieldDescriptor getOneofFieldDescriptor(Descriptors.OneofDescriptor oneof) {
+    return null;
+  }
 
-    @Override
-    public boolean hasOneof(Descriptors.OneofDescriptor oneof) {
-        return false;
-    }
+  @Override
+  public boolean hasField(Descriptors.FieldDescriptor field) {
+    return false;
+  }
 
-    @Override
-    public Descriptors.FieldDescriptor getOneofFieldDescriptor(Descriptors.OneofDescriptor oneof) {
-        return null;
-    }
+  @Override
+  public Object getField(Descriptors.FieldDescriptor field) {
+    return null;
+  }
 
-    @Override
-    public boolean hasField(Descriptors.FieldDescriptor field) {
-        return false;
-    }
+  @Override
+  public int getRepeatedFieldCount(Descriptors.FieldDescriptor field) {
+    return 0;
+  }
 
-    @Override
-    public Object getField(Descriptors.FieldDescriptor field) {
-        return null;
-    }
+  @Override
+  public Object getRepeatedField(Descriptors.FieldDescriptor field, int index) {
+    return null;
+  }
 
-    @Override
-    public int getRepeatedFieldCount(Descriptors.FieldDescriptor field) {
-        return 0;
-    }
-
-    @Override
-    public Object getRepeatedField(Descriptors.FieldDescriptor field, int index) {
-        return null;
-    }
-
-    @Override
-    public UnknownFieldSet getUnknownFields() {
-        return null;
-    }
+  @Override
+  public UnknownFieldSet getUnknownFields() {
+    return null;
+  }
 }

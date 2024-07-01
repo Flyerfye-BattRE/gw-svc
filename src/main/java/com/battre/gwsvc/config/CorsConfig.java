@@ -15,47 +15,46 @@ import reactor.core.publisher.Mono;
 
 import java.util.logging.Logger;
 
-/**
- * Configures the CORS settings for the gateway service to allow requests from different origins
- *
- */
+/** Configures the CORS settings for the gateway service to allow requests from different origins */
 @Configuration
 public class CorsConfig {
-    private static final Logger logger = Logger.getLogger(CorsConfig.class.getName());
+  private static final Logger logger = Logger.getLogger(CorsConfig.class.getName());
 
-    private static final String CUSTOM_ALLOWED_HEADERS =
-            ", customerId" +
-            ", batteryId" +
-            ", priority" +
-            ", firstName" +
-            ", lastName" +
-            ", email" +
-            ", phone" +
-            ", address" +
-            ", loyaltyId";
+  private static final String CUSTOM_ALLOWED_HEADERS =
+      ", customerId"
+          + ", batteryId"
+          + ", priority"
+          + ", firstName"
+          + ", lastName"
+          + ", email"
+          + ", phone"
+          + ", address"
+          + ", loyaltyId";
 
-    private static final String ALLOWED_HEADERS = "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN" + CUSTOM_ALLOWED_HEADERS;
-    private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS";
-    private static final String ALLOWED_ORIGIN = "*";
-    private static final String MAX_AGE = "3600";
+  private static final String ALLOWED_HEADERS =
+      "x-requested-with, authorization, Content-Type, Authorization, credential, X-XSRF-TOKEN"
+          + CUSTOM_ALLOWED_HEADERS;
+  private static final String ALLOWED_METHODS = "GET, PUT, POST, DELETE, OPTIONS";
+  private static final String ALLOWED_ORIGIN = "*";
+  private static final String MAX_AGE = "3600";
 
-    @Bean
-    public WebFilter corsFilter() {
-        return (ServerWebExchange ctx, WebFilterChain chain) -> {
-            ServerHttpRequest request = ctx.getRequest();
-            if (CorsUtils.isCorsRequest(request)) {
-                ServerHttpResponse response = ctx.getResponse();
-                HttpHeaders headers = response.getHeaders();
-                headers.add("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
-                headers.add("Access-Control-Allow-Methods", ALLOWED_METHODS);
-                headers.add("Access-Control-Max-Age", MAX_AGE);
-                headers.add("Access-Control-Allow-Headers",ALLOWED_HEADERS);
-                if (request.getMethod() == HttpMethod.OPTIONS) {
-                    response.setStatusCode(HttpStatus.OK);
-                    return Mono.empty();
-                }
-            }
-            return chain.filter(ctx);
-        };
-    }
+  @Bean
+  public WebFilter corsFilter() {
+    return (ServerWebExchange ctx, WebFilterChain chain) -> {
+      ServerHttpRequest request = ctx.getRequest();
+      if (CorsUtils.isCorsRequest(request)) {
+        ServerHttpResponse response = ctx.getResponse();
+        HttpHeaders headers = response.getHeaders();
+        headers.add("Access-Control-Allow-Origin", ALLOWED_ORIGIN);
+        headers.add("Access-Control-Allow-Methods", ALLOWED_METHODS);
+        headers.add("Access-Control-Max-Age", MAX_AGE);
+        headers.add("Access-Control-Allow-Headers", ALLOWED_HEADERS);
+        if (request.getMethod() == HttpMethod.OPTIONS) {
+          response.setStatusCode(HttpStatus.OK);
+          return Mono.empty();
+        }
+      }
+      return chain.filter(ctx);
+    };
+  }
 }
