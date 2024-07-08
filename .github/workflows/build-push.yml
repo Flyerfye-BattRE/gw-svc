@@ -1,0 +1,39 @@
+name: Build and Push
+
+on:
+  workflow_dispatch:  # Manually trigger
+
+jobs:
+  build-and-push:
+    runs-on: ubuntu-latest
+    env:
+      AWS_REGION: "us-west-2"
+      ECR_REGISTRY: ${{ secrets.ECR_REGISTRY }}
+      REPO: "gwsvc"
+      IMAGE_TAG: latest
+    steps:
+      - name: Checkout Repository
+        uses: actions/checkout@v2
+
+      - name: Set up JDK 17
+        uses: actions/setup-java@v2
+        with:
+          java-version: '17'
+          distribution: 'temurin'
+
+      - name: Build and Push Docker Image
+        run: |          
+          # Authenticate Docker to ECR
+          aws ecr get-login-password --region $AWS_REGION | docker login --username AWS --password-stdin $ECR_REGISTRY
+
+          # Build Docker image
+          # docker-compose build
+          docker build -t $REPO-repo .
+          
+          # Tag Docker image
+          # docker tag your-service-image:$IMAGE_TAG $ECR_REGISTRY/your-service-image:$IMAGE_TAG
+          docker tag $REPO-repo:$IMAGE_TAG $ECR_REGISTRY/$REPO-repo:$IMAGE_TAG
+          # docker tag $REPO-repo:latest 
+
+          # Push Docker image to ECR
+          docker push $ECR_REGISTRY/your-service-image:$IMAGE_TAG
