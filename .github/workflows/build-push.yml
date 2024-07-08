@@ -23,7 +23,7 @@ jobs:
           role-to-assume: arn:aws:iam::AWS_ACCOUNT_ID:role/GitHubActionsRole
           aws-region: us-west-2
           role-session-name: GitHubActionsSession
-          external-id: AWS_EXTERNAL_ID
+          role-external-id: AWS_EXTERNAL_ID
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
