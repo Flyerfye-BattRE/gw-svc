@@ -25,4 +25,4 @@ jobs:
         run: echo "<settings><servers><server><id>github-battre</id><username>${{ secrets.DEPENDENCY_USERNAME }}</username><password>${{ secrets.DEPENDENCY_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
 
       - name: Unit test with Maven
-        run: mvn -B clean test
+        run: mvn -B cleabn test
