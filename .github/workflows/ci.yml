@@ -25,3 +25,10 @@ jobs:
 
       - name: Unit test with Maven
         run: mvn -B clean test
+
+      - name: Report status to GitHub
+        if: always()  # Always report status even if there is a prior failure
+        uses: env/actions/github@v1
+        with:
+          status: ${{ job.status }}
+          token: ${{ secrets.GITHUB_TOKEN }}
