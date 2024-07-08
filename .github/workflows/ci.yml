@@ -27,8 +27,8 @@ jobs:
         run: mvn -B clean test
 
       - name: Report status to GitHub
-        if: always()  # Always report status even if there is a prior failure
-        uses: actions/github@v1
-        with:
-          status: ${{ job.status }}
-          token: ${{ secrets.GITHUB_TOKEN }}
+        if: always() # Always report status even if there is a prior failure
+        run: |
+          STATUS=$(if [ ${{ job.status }} == success ]; then echo "success"; else echo "failure"; fi)
+          PAYLOAD="{\"state\": \"$STATUS\", \"context\": \"CI Checks\"}"
+          curl -X POST -H "Authorization: token ${{ secrets.GITHUB_TOKEN }}" -d "$PAYLOAD" "https://api.github.com/repos/${GITHUB_REPOSITORY}/statuses/${GITHUB_SHA}"
