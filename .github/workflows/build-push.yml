@@ -34,6 +34,9 @@ jobs:
           java-version: '17'
           distribution: 'temurin'
 
+      - name: Configure Maven settings
+        run: echo "<settings><servers><server><id>github-battre</id><username>${{ secrets.DEPENDENCY_USERNAME }}</username><password>${{ secrets.DEPENDENCY_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
+
       - name: Build with Maven
         run: mvn clean package
 
