@@ -5,8 +5,8 @@ on:
     branches: [ main ]
 
 jobs:
-  name: mvn-test
   build:
+    name: mvn-test
     runs-on: ubuntu-latest
     env:
       AWS_REGION: "us-west-2"
