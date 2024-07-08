@@ -29,7 +29,16 @@ jobs:
       - name: Report status to GitHub
         uses: myrotvorets/set-commit-status-action@master
         if: always() # Always report status even if there is a prior failure
-        with:
-          sha: ${{ secrets.GITHUB_SHA }}
-          token: ${{ secrets.GITHUB_TOKEN }}
-          status: ${{ job.status }}
+        run: |
+          STATUS=$(if [ ${{ job.status }} == success ]; then echo "success"; else echo "failure"; fi)
+          PAYLOAD="{\"state\": \"$STATUS\", \"context\": \"CI Checks\", \"target_url\": \"${{ github.run_url }}\"}"
+          RESPONSE=$(curl -s -o /dev/null -w "%{http_code}" -X POST \
+                     -H "Accept: application/vnd.github+json" \
+                     -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
+                     -H "X-GitHub-Api-Version: 2022-11-28" \
+                     -d "$PAYLOAD" \
+                     "https://api.github.com/repos/${{ github.repository }}/commits/${GITHUB_SHA}/statuses")
+          if [[ $RESPONSE -ne 201 ]]; then
+            echo "Failed to set commit status. HTTP status code: $RESPONSE"
+            exit 1
+          fi
