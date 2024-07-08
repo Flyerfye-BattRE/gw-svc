@@ -8,9 +8,4 @@ import static org.junit.jupiter.api.Assertions.fail;
 class GwSvcApplicationTests {
   @Test
   void contextLoads() {}
-
-  @Test
-  void alwaysFails() {
-    fail("This test is designed to always fail.");
-  }
 }
