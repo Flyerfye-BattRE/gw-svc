@@ -3,6 +3,8 @@ name: CI
 on:
   push:
     branches: [ main ]
+  pull_request:
+    branches: [ main ]
 
 jobs:
   build:
@@ -24,5 +26,8 @@ jobs:
       - name: Configure Maven settings
         run: echo "<settings><servers><server><id>github-battre</id><username>${{ secrets.DEPENDENCY_USERNAME }}</username><password>${{ secrets.DEPENDENCY_PASSWORD }}</password></server></servers></settings>" > ~/.m2/settings.xml
 
-      - name: Unit test with Maven
+      - name: Build with Maven
+        run: mvn -B clean install
+
+      - name: Run tests with Maven
         run: mvn -B cleabn test
