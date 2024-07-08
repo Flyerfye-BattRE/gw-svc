@@ -27,7 +27,6 @@ jobs:
         run: mvn -B clean test
 
       - name: Report status to GitHub
-        uses: myrotvorets/set-commit-status-action@master
         if: always() # Always report status even if there is a prior failure
         run: |
           STATUS=$(if [ ${{ job.status }} == success ]; then echo "success"; else echo "failure"; fi)
