@@ -31,9 +31,9 @@ jobs:
           docker build -t $REPO-repo .
           
           # Tag Docker image
-          # docker tag your-service-image:$IMAGE_TAG $ECR_REGISTRY/your-service-image:$IMAGE_TAG
+          # docker tag your-service-image:$IMAGE_TAG $ECR_REGISTRY/$REPO-repo:$IMAGE_TAG
           docker tag $REPO-repo:$IMAGE_TAG $ECR_REGISTRY/$REPO-repo:$IMAGE_TAG
           # docker tag $REPO-repo:latest 
 
           # Push Docker image to ECR
-          docker push $ECR_REGISTRY/your-service-image:$IMAGE_TAG
+          docker push $ECR_REGISTRY/$REPO-repo:$IMAGE_TAG
