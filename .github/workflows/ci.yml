@@ -36,7 +36,7 @@ jobs:
                      -H "Authorization: Bearer ${{ secrets.GITHUB_TOKEN }}" \
                      -H "X-GitHub-Api-Version: 2022-11-28" \
                      -d "$PAYLOAD" \
-                     "https://api.github.com/repos/${{ github.repository }}/commits/${GITHUB_SHA}/statuses")
+                     "https://api.github.com/repos/${{ github.repository }}/commits/${{ secrets.GITHUB_SHA }}/statuses")
           if [[ $RESPONSE -ne 201 ]]; then
             echo "Failed to set commit status. HTTP status code: $RESPONSE"
             exit 1
