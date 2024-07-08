@@ -16,13 +16,13 @@ jobs:
         uses: actions/checkout@v2
 
       - name: Configure AWS Credentials
-        uses: aws-actions/configure-aws-credentials@v1
+        uses: aws-actions/configure-aws-credentials@v2
         with:
-          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubActionsRole
+          role-to-assume: arn:aws:iam::${{ secrets.AWS_ACCOUNT_ID }}:role/GitHubOIDCRole
           # aws-region: ${{ env.AWS_REGION }}
           aws-region: us-west-2
-          role-session-name: GitHubActionsSession
-          role-external-id: ${{ secrets.AWS_EXTERNAL_ID }}
+          #role-session-name: GitHubActionsSession
+          #role-external-id: ${{ secrets.AWS_EXTERNAL_ID }}
 
       - name: Set up JDK 17
         uses: actions/setup-java@v2
