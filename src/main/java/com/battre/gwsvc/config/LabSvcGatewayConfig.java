@@ -156,6 +156,15 @@ public class LabSvcGatewayConfig {
                         }))
                         .uri("no://op"))
 
+                // getLabPlanStatusCounts
+                .route("labsvc_getLabPlanStatusCounts", r -> r.path("/lab/getLabPlanStatusCounts")
+                        .and()
+                        .method(HttpMethod.GET)
+                        .filters(f -> f.filter((exchange, chain) -> {
+                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getLabPlanStatusCounts);
+                        }))
+                        .uri("no://op"))
+
                 .build();
     }
 }

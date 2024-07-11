@@ -188,6 +188,14 @@ public class OpsSvcGatewayConfig {
                         }))
                         .uri("no://op"))
 
+                // getOpsSvcOverview
+                .route("opssvc_getOpsSvcOverview", r -> r.path("/ops/getOverview")
+                        .and()
+                        .method(HttpMethod.GET)
+                        .filters(f -> f.filter((exchange, chain) -> {
+                            return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getOpsSvcOverview);
+                        }))
+                        .uri("no://op"))
                 .build();
     }
 

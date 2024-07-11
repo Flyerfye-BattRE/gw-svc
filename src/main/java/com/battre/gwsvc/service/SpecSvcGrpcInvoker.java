@@ -5,6 +5,10 @@ import com.battre.stubs.services.GetAllBatterySpecsRequest;
 import com.battre.stubs.services.GetAllBatterySpecsResponse;
 import com.battre.stubs.services.GetBatteryTiersRequest;
 import com.battre.stubs.services.GetBatteryTiersResponse;
+import com.battre.stubs.services.GetLabPlanStatusCountsRequest;
+import com.battre.stubs.services.GetLabPlanStatusCountsResponse;
+import com.battre.stubs.services.GetSpecSvcOverviewRequest;
+import com.battre.stubs.services.GetSpecSvcOverviewResponse;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -38,5 +42,12 @@ public class SpecSvcGrpcInvoker {
         grpcMethodInvoker.invokeNonblock(serviceName, "getBatteryTiers", request);
 
     return processComplexGrpcResponse(response, "Could not get Battery Tiers.");
+  }
+
+  public String getSpecSvcOverview() {
+    GetSpecSvcOverviewRequest request = GetSpecSvcOverviewRequest.newBuilder().build();
+    GetSpecSvcOverviewResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getSpecSvcOverview", request);
+
+    return processComplexGrpcResponse(response, "Could not get Spec Svc overview.");
   }
 }

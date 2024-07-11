@@ -13,6 +13,8 @@ import com.battre.stubs.services.GetBatteryInventoryRequest;
 import com.battre.stubs.services.GetBatteryInventoryResponse;
 import com.battre.stubs.services.GetCustomerListRequest;
 import com.battre.stubs.services.GetCustomerListResponse;
+import com.battre.stubs.services.GetOpsSvcOverviewRequest;
+import com.battre.stubs.services.GetOpsSvcOverviewResponse;
 import com.battre.stubs.services.RemoveCustomerRequest;
 import com.battre.stubs.services.RemoveCustomerResponse;
 import com.battre.stubs.services.UpdateCustomerRequest;
@@ -117,5 +119,12 @@ public class OpsSvcGrpcInvoker {
         UpdateCustomerResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "updateCustomer", request);
 
         return processSimpleGrpcResponse(response, "Could not Update Customer.");
+    }
+
+    public String getOpsSvcOverview() {
+        GetOpsSvcOverviewRequest request = GetOpsSvcOverviewRequest.newBuilder().build();
+        GetOpsSvcOverviewResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getOpsSvcOverview", request);
+
+        return processComplexGrpcResponse(response, "Could not get Ops Svc overview.");
     }
 }

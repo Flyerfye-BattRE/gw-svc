@@ -63,6 +63,14 @@ public class SpecSvcGatewayConfig {
                                       exchange, chain, grpcMethodInvoker::getBatteryTiers);
                                 }))
                     .uri("no://op"))
+            // getSpecSvcOverview
+            .route("specsvc_getSpecSvcOverview", r -> r.path("/spec/getOverview")
+                    .and()
+                    .method(HttpMethod.GET)
+                    .filters(f -> f.filter((exchange, chain) -> {
+                        return processNoInputGrpcRequest(exchange, chain, grpcMethodInvoker::getSpecSvcOverview);
+                    }))
+                    .uri("no://op"))
         .build();
   }
 }

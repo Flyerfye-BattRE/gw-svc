@@ -8,8 +8,12 @@ import com.battre.stubs.services.ChangeBatteryRefurbPriorityRequest;
 import com.battre.stubs.services.ChangeBatteryRefurbPriorityResponse;
 import com.battre.stubs.services.ChangeBatteryTesterPriorityRequest;
 import com.battre.stubs.services.ChangeBatteryTesterPriorityResponse;
+import com.battre.stubs.services.GetLabPlanStatusCountsRequest;
+import com.battre.stubs.services.GetLabPlanStatusCountsResponse;
 import com.battre.stubs.services.GetLabPlansRequest;
 import com.battre.stubs.services.GetLabPlansResponse;
+import com.battre.stubs.services.GetOpsSvcOverviewRequest;
+import com.battre.stubs.services.GetOpsSvcOverviewResponse;
 import com.battre.stubs.services.GetRefurbPlansRequest;
 import com.battre.stubs.services.GetRefurbPlansResponse;
 import com.battre.stubs.services.GetRefurbStnInfoRequest;
@@ -111,5 +115,12 @@ public class LabSvcGrpcInvoker {
         GetRefurbStnInfoResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getRefurbStnInfo", request);
 
         return processComplexGrpcResponse(response, "Could not get Refurb Maintenance Logs.");
+    }
+
+    public String getLabPlanStatusCounts() {
+        GetLabPlanStatusCountsRequest request = GetLabPlanStatusCountsRequest.newBuilder().build();
+        GetLabPlanStatusCountsResponse response = grpcMethodInvoker.invokeNonblock(serviceName, "getLabPlanStatusCounts", request);
+
+        return processComplexGrpcResponse(response, "Could not get lab plan status counts.");
     }
 }
